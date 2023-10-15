@@ -1,0 +1,1 @@
+g++ customer.cpp file.cpp finance.cpp manager.cpp order.cpp product.cpp warehouse.cpp main.cpp -o abc

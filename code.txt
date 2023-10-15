@@ -1,0 +1,400 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+// Lớp sản phẩm
+class Product {
+private:
+    string name;
+    int quantity;
+    double price;
+public:
+    Product(string name, int quantity, double price) {
+        this->name = name;
+        this->quantity = quantity;
+        this->price = price;
+    }
+    string getName() {
+        return name;
+    }
+    int getQuantity() {
+        return quantity;
+    }
+    double getPrice() {
+        return price;
+    }
+    void setQuantity(int quantity) {
+        this->quantity = quantity;
+    }
+};
+
+// Lớp khách hàng
+class Customer {
+private:
+    string name;
+    string phone;
+    string address;
+    vector<string> purchaseHistory;
+public:
+    Customer(string name, string phone, string address) {
+        this->name = name;
+        this->phone = phone;
+        this->address = address;
+    }
+    string getName() {
+        return name;
+    }
+    string getPhone() {
+        return phone;
+    }
+    string getAddress() {
+        return address;
+    }
+    void addPurchaseHistory(string productName) {
+        purchaseHistory.push_back(productName);
+    }
+};
+
+// Lớp đơn hàng
+class Order {
+private:
+    int orderNumber;
+    Customer customer;
+    vector<Product> productList;
+    double totalAmount;
+    string orderDate;
+    string deliveryDate;
+public:
+    Order(int orderNumber, Customer customer, vector<Product> productList, double totalAmount, string orderDate, string deliveryDate) {
+        this->orderNumber = orderNumber;
+        this->customer = customer;
+        this->productList = productList;
+        this->totalAmount = totalAmount;
+        this->orderDate = orderDate;
+        this->deliveryDate = deliveryDate;
+    }
+    int getOrderNumber() {
+        return orderNumber;
+    }
+    Customer getCustomer() {
+        return customer;
+    }
+    vector<Product> getProductList() {
+        return productList;
+    }
+    double getTotalAmount() {
+        return totalAmount;
+    }
+    string getOrderDate() {
+        return orderDate;
+    }
+    string getDeliveryDate() {
+        return deliveryDate;
+    }
+};
+
+// Lớp quản lý đơn hàng
+class OrderManager {
+private:
+    vector<Order> orderList;
+public:
+    void addOrder(Order order) {
+        orderList.push_back(order);
+    }
+    void removeOrder(int orderNumber) {
+        for (int i = 0; i < orderList.size(); i++) {
+            if (orderList[i].getOrderNumber() == orderNumber) {
+                orderList.erase(orderList.begin() + i);
+                break;
+            }
+        }
+    }
+    void updateOrder(Order order) {
+        for (int i = 0; i < orderList.size(); i++) {
+            if (orderList[i].getOrderNumber() == order.getOrderNumber()) {
+                orderList[i] = order;
+                break;
+            }
+        }
+    }
+};
+
+// Lớp nhà cung cấp
+class Supplier {
+private:
+    string name;
+    string phone;
+    string address;
+public:
+    Supplier(string name, string phone, string address) {
+        this->name = name;
+        this->phone = phone;
+        this->address = address;
+    }
+    string getName() {
+        return name;
+    }
+    string getPhone() {
+        return phone;
+    }
+    string getAddress() {
+        return address;
+    }
+};
+
+// Lớp quản lý nhà cung cấp
+class SupplierManager {
+private:
+    vector<Supplier> supplierList;
+public:
+    void addSupplier(Supplier supplier) {
+        supplierList.push_back(supplier);
+    }
+    void removeSupplier(string name) {
+        for (int i = 0; i < supplierList.size(); i++) {
+            if (supplierList[i].getName() == name) {
+                supplierList.erase(supplierList.begin() + i);
+                break;
+            }
+        }
+    }
+};
+
+// Lớp kho hàng
+class Warehouse {
+private:
+    vector<Product> productList;
+public:
+    void addProduct(Product product) {
+        productList.push_back(product);
+    }
+};
+
+// Lớp quản lý thu chi
+class FinancialManager {
+private:
+    double totalRevenue;
+    double totalExpense;
+public:
+    void addRevenue(double amount) {
+        totalRevenue += amount;
+    }
+    void addExpense(double amount) {
+        totalExpense += amount;
+    }
+};
+
+// Lớp nhân viên
+class Employee {
+private:
+    string name;
+    string phone;
+    string address;
+public:
+    Employee(string name, string phone, string address) {
+        this->name = name;
+        this->phone = phone;
+        this->address = address;
+    }
+};
+
+// Lớp quản lý nhân viên
+class EmployeeManager {
+private:
+    vector<Employee> employeeList;
+public:
+    void addEmployee(Employee employee) {
+        employeeList.push_back(employee);
+    }
+};
+
+// Hàm main
+int main() {
+    // Khởi tạo đối tượng quản lý đơn hàng
+    OrderManager orderManager;
+
+    // Khởi tạo đối tượng khách hàng
+    Customer customer("Nguyen Van A", "0123456789", "123 ABC Street");
+
+    // Khởi tạo danh sách sản phẩm
+    vector<Product> productList1 = {Product("Product 1", 10, 10000), Product("Product 2", 5, 20000), Product("Product 3", 3, 30000)};
+
+    // Khởi tạo đối tượng đơn hàng
+    Order order1(1, customer, productList1, 110000, "2023-09-17", "2023-09-18");
+
+    // Thêm đơn hàng vào quản lý đơn hàng
+    orderManager.addOrder(order1);
+
+    // Hiển thị danh sách đơn hàng
+   …[omitted]
+// Lớp nhà cung cấp
+class Supplier {
+private:
+    string name;
+    string phone;
+    string address;
+    vector<Product> productList;
+public:
+    Supplier(string name, string phone, string address, vector<Product> productList) {
+        this->name = name;
+        this->phone = phone;
+        this->address = address;
+        this->productList = productList;
+    }
+    string getName() {
+        return name;
+    }
+    string getPhone() {
+        return phone;
+    }
+    string getAddress() {
+        return address;
+    }
+    vector<Product> getProductList() {
+        return productList;
+    }
+};
+
+// Lớp kho
+class Warehouse {
+private:
+    vector<Product> productList;
+public:
+    void addProduct(Product product) {
+        productList.push_back(product);
+    }
+    void removeProduct(string name) {
+        for (int i = 0; i < productList.size(); i++) {
+            if (productList[i].getName() == name) {
+                productList.erase(productList.begin() + i);
+                break;
+            }
+        }
+    }
+    void updateProduct(string name, int quantity) {
+        for (int i = 0; i < productList.size(); i++) {
+            if (productList[i].getName() == name) {
+                productList[i].setQuantity(quantity);
+                break;
+            }
+        }
+    }
+    int getProductQuantity(string name) {
+        for (int i = 0; i < productList.size(); i++) {
+            if (productList[i].getName() == name) {
+                return productList[i].getQuantity();
+            }
+        }
+        return 0;
+    }
+};
+
+// Lớp thu chi
+class Finance {
+private:
+    double totalRevenue;
+    double totalExpense;
+public:
+    Finance() {
+        totalRevenue = 0;
+        totalExpense = 0;
+    }
+    void addRevenue(double revenue) {
+        totalRevenue += revenue;
+    }
+    void addExpense(double expense) {
+        totalExpense += expense;
+    }
+    double getProfit() {
+        return totalRevenue - totalExpense;
+    }
+};
+
+// Lớp nhân viên
+class Employee {
+private:
+    string name;
+    string phone;
+    string address;
+    string position;
+    double salary;
+public:
+    Employee(string name, string phone, string address, string position, double salary) {
+        this->name = name;
+        this->phone = phone;
+        this->address = address;
+        this->position = position;
+        this->salary = salary;
+    }
+    string getName() {
+        return name;
+    }
+    string getPhone() {
+        return phone;
+    }
+    string getAddress() {
+        return address;
+    }
+    string getPosition() {
+        return position;
+    }
+    double getSalary() {
+        return salary;
+    }
+};
+
+// Lớp quản lý bán hàng
+class SalesManager {
+private:
+    vector<Order> orderList;
+    vector<Customer> customerList;
+public:
+    void addOrder(Order order) {
+        orderList.push_back(order);
+        // Thêm đơn hàng vào lịch sử mua hàng của khách hàng
+        Customer customer = order.getCustomer();
+        customer.addPurchaseHistory(order.getProductList()[0].getName());
+        // Cập nhật số lượng sản phẩm trong kho
+        Warehouse warehouse;
+        vector<Product> productList = order.getProductList();
+        for (int i = 0; i < productList.size(); i++) {
+            Product product = productList[i];
+            int quantityInWarehouse = warehouse.getProductQuantity(product.getName());
+            warehouse.updateProduct(product.getName(), quantityInWarehouse - product.getQuantity());
+        }
+        // Cập nhật doanh thu
+        Finance finance;
+        finance.addRevenue(order.getTotalAmount());
+    }
+    void addCustomer(Customer customer) {
+        customerList.push_back(customer);
+    }
+};
+
+// Hàm main
+int main() {
+    // Khởi tạo quản lý bán hàng
+    SalesManager salesManager;
+
+    // Thêm khách hàng
+    Customer customer1("Customer 1", "123456789", "Address 1");
+    salesManager.addCustomer(customer1);
+
+    // Thêm sản phẩm
+    Product product1("Product 1", 10, 10000);
+    Product product2("Product 2", 20, 20000);
+    Warehouse warehouse;
+    warehouse.addProduct(product1);
+    warehouse.addProduct(product2);
+
+    // Tạo đơn hàng
+    vector<Product> productList1 = {product1, product2};
+    Order order1(1, customer1, productList1, 500000, "2023-09-17", "2023-09-18");
+
+    // Thêm đơn hàng
+    salesManager.addOrder(order1);
+
+    return 0;
+}
+```
